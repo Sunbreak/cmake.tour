@@ -1,0 +1,19 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - '*'
+      - '*/*'
+      - '!master'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          mkdir Step1_build && cd Step1_build && cmake ../Step1 && cmake --build .
