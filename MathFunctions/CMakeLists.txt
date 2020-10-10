@@ -22,6 +22,12 @@ if(NOT (HAVE_LOG AND HAVE_EXP))
   endif()
 endif()
 
+# add compile definitions
+if(HAVE_LOG AND HAVE_EXP)
+  target_compile_definitions(MathFunctions
+                             PRIVATE "HAVE_LOG" "HAVE_EXP")
+endif()
+
 # install rules
 install(TARGETS MathFunctions DESTINATION lib)
 install(FILES MathFunctions.h DESTINATION include)
