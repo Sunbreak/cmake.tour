@@ -15,5 +15,5 @@ jobs:
         os: [windows-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
-      - run: |
-          mkdir build && cd build && cmake ../ && cmake --build .
+      - run: mkdir build && cd build && cmake .. && cmake --build . --config Release
+      - run: ctest -C Release
