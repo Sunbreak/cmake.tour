@@ -3,8 +3,10 @@ add_library(MathFunctions MathFunctions.cxx)
 
 # to find MathFunctions.h, while we don't.
 target_include_directories(MathFunctions
-        INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
-        )
+                           INTERFACE
+                            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+                            $<INSTALL_INTERFACE:include>
+                           )
 
 # should we use our own math functions
 option(USE_MYMATH "Use tutorial provided math implementation" ON)
@@ -50,5 +52,7 @@ set(installable_libs MathFunctions)
 if(TARGET SqrtLibrary)
   list(APPEND installable_libs SqrtLibrary)
 endif()
-install(TARGETS ${installable_libs} DESTINATION lib)
+install(TARGETS ${installable_libs}
+        DESTINATION lib
+        EXPORT MathFunctionsTargets)
 install(FILES MathFunctions.h DESTINATION include)
